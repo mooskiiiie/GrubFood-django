@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'webkiosk/styles/customer_form.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrubFood - Add Customer</title>
+</head>
+<body>
+    <section class='sidenav'>
+        <div class='user'>
+            <img class='profile' src="{% static 'webkiosk/images/profile.png' %}">
+            <h3>{{ request.user }}</h3>
+        </div>
+        <ul>
+            <div class='products'>
+                <img class='productsicon' src="{% static 'webkiosk/images/products.png' %}">
+                <li><a href="{% url 'webkiosk:food-list' %}">Products</a></li>
+            </div>
+            {% if request.user.is_staff %}
+            <div class="customers">
+                <img class='productsicon' src="{% static 'webkiosk/images/customers.png' %}">
+                <li><a href="{% url 'webkiosk:customer-list' %}">Customers</a></li>
+            </div>
+            {% endif %}
+            {% if request.user.is_staff %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:order-list' %}">Orders</a></li>
+            </div>
+            {% endif %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:user-page' %}">Profile</a></li>
+            </div>
+        </ul>
+        <img class='logo' src="{% static 'webkiosk/images/logo.png' %}">
+    </section>
+    <section class="header">
+        <div class="searchbar">
+            <img class='search' src="{% static 'webkiosk/images/search.png' %}">
+            <input type='text' placeholder="Search...">
+        </div>
+        <div class='rightside'>
+            <a href="{% url 'webkiosk:logout' %}">Log out</a>
+            <img src="{% static 'webkiosk/images/settings.png' %}">
+        </div>
+    </section>
+
+    <main class='main'>
+        <section class='addedit__title'>
+            <h3>Add or Edit Customer</h3>
+            {% for message in messages %}
+            <p class='three'>{{ message }}</p>
+            {% endfor %}
+        </section>
+        
+        <section class='details'>
+                <h4 class='two'>Customer #{{ customer.pk }}</h4>
+                <form method='post'>
+                <section class='inputs'>
+                        {% csrf_token %}
+                           <h4 class='firstname'>{{ form.firstname.label }}</h4>
+                            {{ form.firstname }}
+                            <h4 class='lastname'>{{ form.lastname.label }}</h4>
+                            {{ form.lastname }}
+                            <h4 class='address'>{{ form.address.label }}</h4>
+                            {{ form.address }}
+                            <h4 class='city'>{{ form.city.label }}</h4>
+                            {{ form.city }}
+                        <div class='one'>
+                            <input class='save' type='submit' value="Submit">
+                        </div>
+                </section>
+            </form>
+                   
+            </section>
+        </section>
+    </main>

@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+    font-family: Poppins;
+}
+
+.bg1 {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.bg2 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0px 3px 10px rgb(180, 180, 180);
+    border-radius: 7px;
+    padding: 15px;
+    width: 32%;
+    margin-left: 32%;
+    margin-right: 32%;
+    margin-top: 7%;
+}
+
+.logo {
+    width: 35%;
+}
+
+.innercontainer {
+    margin: 10px 10px;
+}
+
+.welcome > p {
+    line-height: 8px;
+    font-size: 16px;
+    color: #2E2E2E;
+}
+
+.welcome {
+    margin-bottom: 30px;
+}
+
+.first, .second, .first2, .second2 {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+}
+
+.fourth, .fifth {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.fifth {
+    margin-top: 20px;
+}
+
+.fifth > p {
+    color: #555555;
+    line-height: 5px;
+}
+
+.fourth > p > a {
+    text-decoration: none;
+}
+
+.first > label, .second > label, .first2 > label, .second2 > label {
+    color: #555555;
+    font-size: 16px;
+}
+
+.first > input, .second > input, .first2 > input, .second2 > input {
+    border: none;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.third {
+    margin: 40px 0px 0px 0px;
+}
+
+.third > input {
+    color: white;
+    background-color: #1F252C;
+    border-radius: 1px;
+    border: none;
+    width: 30%;
+    padding: 6px;
+    font-size: 16px;
+}
+
+#messages{
+    color: red;
+    margin: 10px 0px 0px 10px;
+}

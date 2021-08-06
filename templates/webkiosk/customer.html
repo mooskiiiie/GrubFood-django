@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'webkiosk/styles/customer.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrubFood - Customers</title>
+</head>
+<body>
+    <section class='sidenav'>
+        <div class='user'>
+            <img class='profile' src="{% static 'webkiosk/images/profile.png' %}">
+            <h3>{{ request.user }}</h3>
+        </div>
+        <ul>
+            <div class='products'>
+                <img class='productsicon' src="{% static 'webkiosk/images/products.png' %}">
+                <li><a href="{% url 'webkiosk:food-list' %}">Products</a></li>
+            </div>
+            {% if request.user.is_staff %}
+            <div class="customers">
+                <img class='productsicon' src="{% static 'webkiosk/images/customers.png' %}">
+                <li><a href="{% url 'webkiosk:customer-list' %}">Customers</a></li>
+            </div>
+            {% endif %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:order-list' %}">Orders</a></li>
+            </div>
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:user-page' %}">Profile</a></li>
+            </div>
+        </ul>
+        <img class='logo' src="{% static 'webkiosk/images/logo.png' %}">
+    </section>
+    <section class="header">
+        <div class="searchbar">
+            <img class='search' src="{% static 'webkiosk/images/search.png' %}">
+            <input type='text' placeholder="Search...">
+        </div>
+        <div class='rightside'>
+            <a href="{% url 'webkiosk:logout' %}">Log out</a>
+            <img src="{% static 'webkiosk/images/settings.png' %}">
+        </div>
+    </section>
+    <main class='main'>
+        <section class='customers__title'>
+            <h3>Customers</h3>
+            <a class='new' href="{% url 'webkiosk:customer-create' %}"><button class='new2'>New Customer</button></a>
+          </section>
+          
+          <section class='customer__list'>
+            <h4>Customers</h4>
+            <div class='grey__header'>
+              <div class='top__titles'>
+                <p class='id'>ID</p>
+                <p class='customer'>Customer Name</p>
+                <p class='city'> City </p>
+              </div>
+            </div>
+          
+                {% for customer in customerlist %}
+                <div class="info">
+                    <div class="rows">
+                        <p class='detail__id'>{{ customer.pk }}</p>
+                        <p class='detail__customer'>{{ customer.firstname }} {{ customer.lastname }}</p>
+                        <p class='detail__city'> {{ customer.city }} </p>
+                        <a href="{% url 'webkiosk:customer-detail' customer.id %}"><button class='details'>Details</button></a>
+                        <a href="{% url 'webkiosk:customer-update' customer.id %}"><button class='edit'>Edit</button></a>
+                        <a href="{% url 'webkiosk:customer-delete' customer.id%}"><button class='delete'>Delete</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+          </section>
+    </main>
+</body>
+</html>

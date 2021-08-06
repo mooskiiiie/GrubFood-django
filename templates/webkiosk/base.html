@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'webkiosk/styles/main.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block pagetitle %}{% endblock %}</title>
+    <style>
+        .header {
+            margin-left: 230px;
+        }
+    </style>
+
+</head>
+<body>
+    {% block mainnav %}
+    <section class='sidenav'>
+        <div class='user'>
+            <img class='profile' src="{% static 'webkiosk/images/profile.png' %}">
+            <h3>{{ request.user }}</h3>
+        </div>
+        <ul>
+            <div class='products'>
+                <img class='productsicon' src="{% static 'webkiosk/images/products.png' %}">
+                <li><a href="{% url 'webkiosk:food-list' %}">Products</a></li>
+            </div>
+            <div class="customers">
+                <img class='productsicon' src="{% static 'webkiosk/images/customers.png' %}">
+                <li><a href="{% url 'webkiosk:customer-list' %}">Customers</a></li>
+            </div>
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:order-list' %}">Orders</a></li>
+            </div>
+        </ul>
+        <img class='logo' src="{% static 'webkiosk/images/logo.png' %}">
+    </section>
+    {% endblock %}
+    <section class="header">
+        <div class="searchbar">
+            <img class='search' src="{% static 'webkiosk/images/search.png' %}">
+            <input type='text' placeholder="Search...">
+        </div>
+        <div class='rightside'>
+            <a href="{% url 'webkiosk:logout' %}">Log out</a>
+            <img src="{% static 'webkiosk/images/settings.png' %}">
+        </div>
+    </section>
+    <main class='main'>
+       
+        {% block maincontent %}
+
+        {% endblock %}
+    </main>
+</body>
+</html>
+
+

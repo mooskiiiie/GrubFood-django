@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'webkiosk/styles/order_detail.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrubFood - Order {{ order.id }} </title>
+</head>
+<body>
+    <section class='sidenav'>
+        <div class='user'>
+            <img class='profile' src="{% static 'webkiosk/images/profile.png' %}">
+            <h3>{{ request.user }}</h3>
+        </div>
+        <ul>
+            <div class='products'>
+                <img class='productsicon' src="{% static 'webkiosk/images/products.png' %}">
+                <li><a href="{% url 'webkiosk:food-list' %}">Products</a></li>
+            </div>
+            {% if request.user.is_staff %}
+            <div class="customers">
+                <img class='productsicon' src="{% static 'webkiosk/images/customers.png' %}">
+                <li><a href="{% url 'webkiosk:customer-list' %}">Customers</a></li>
+            </div>
+            {% endif %}
+            {% if request.user.is_staff %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:order-list' %}">Orders</a></li>
+            </div>
+            {% endif %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:user-page' %}">Profile</a></li>
+            </div>
+        </ul>
+        <img class='logo' src="{% static 'webkiosk/images/logo.png' %}">
+    </section>
+    <section class="header">
+        <div class="searchbar">
+            <img class='search' src="{% static 'webkiosk/images/search.png' %}">
+            <input type='text' placeholder="Search...">
+        </div>
+        <div class='rightside'>
+            <a href="{% url 'webkiosk:logout' %}">Log out</a>
+            <img src="{% static 'webkiosk/images/settings.png' %}">
+        </div>
+    </section>
+
+    <main class = "main">
+        <section class="addedit__title">
+            <h3> Order Details </h3>
+            {% for message in messages %}
+            <p class='three'>{{ message }}</p>
+            {% endfor %}
+            <button type="submit"> Status: Complete</button>
+        </section>
+
+         <section class="details"> 
+            <h4> Order # {{ order.id }} </h4>
+            <section class="inputs">
+                <div class="field"><h4> Order Date & Time: </h4> <p class="value"> {{ order.orderdatetime }} </p> </div>
+                <div class="field"><h4> Payment Mode: </h4> <p class="value"> {{ order.paymentmode }}</p> </div>
+                <div class="field"><h4> Quantity: </h4><p class="value"> {{ order.quantity }} </p> </div>
+                <div class="field"><h4> Food: </h4><p class="value"> {{ order.food }} </p> </div>
+                <div class="field"><h4> Customer: </h4><p class="value"> {{ order.customer }} </p> </div>
+                <div class="field"><h4> Total Price: </h4><p class="value"> {{ order.total_price }} </p></div>
+            </section>
+        </section>
+
+
+ 
+
+
+        
+    </main>
+</body>
+</html>

@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'webkiosk/styles/food.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrubFood - Menu</title>
+</head>
+<body>
+    <section class='sidenav'>
+        <div class='user'>
+            <img class='profile' src="{% static 'webkiosk/images/profile.png' %}">
+            <h3>{{ request.user }}</h3>
+        </div>
+        <ul>
+            <div class='products'>
+                <img class='productsicon' src="{% static 'webkiosk/images/products.png' %}">
+                <li><a href="{% url 'webkiosk:food-list' %}">Products</a></li>
+            </div>
+            {% if request.user.is_staff %}
+            <div class="customers">
+                <img class='productsicon' src="{% static 'webkiosk/images/customers.png' %}">
+                <li><a href="{% url 'webkiosk:customer-list' %}">Customers</a></li>
+            </div>
+            {% endif %}
+            {% if request.user.is_staff %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:order-list' %}">Orders</a></li>
+            </div>
+            {% endif %}
+            <div class="orders">
+                <img class='productsicon' src="{% static 'webkiosk/images/orders.png' %}">
+                <li><a href="{% url 'webkiosk:user-page' %}">Profile</a></li>
+            </div>
+        </ul>
+        <img class='logo' src="{% static 'webkiosk/images/logo.png' %}">
+    </section>
+    <section class="header">
+        <div class="searchbar">
+            <img class='search' src="{% static 'webkiosk/images/search.png' %}">
+            <input type='text' placeholder="Search...">
+        </div>
+        <div class='rightside'>
+            <a href="{% url 'webkiosk:logout' %}">Log out</a>
+            <img src="{% static 'webkiosk/images/settings.png' %}">
+        </div>
+    </section>
+
+
+    <section class="main">
+        <div class = "topper">
+            <h3> Products </h3>
+            {% if request.user.is_staff %}
+            <button class = "add"> <a href= "{% url 'webkiosk:food-create'%}"> Add Product </a></button>
+            {% endif %}
+        </div>
+    <section class="products__list">
+        <h4>Products</h4>
+        <div class="grey__header">
+            <div class="top__titles"> 
+                <p class='id'>ID</p>
+                <p class='product'>Product Name</p>
+                <p class='price'> Price </p>
+            </div>
+        </div>
+    {% for food in foodlist %}
+        <div class="info">
+            <div class="rows">
+                <div class="foodid">{{ food.id }} </div>
+                <div class="foodname"> {{ food.name }} </div>
+                <div class="foodprice"> {{ food.price }} </div>
+                <a href="{% url 'webkiosk:food-detail' food.id %}"><button class='details'>Details</button></a>
+                {% if request.user.is_staff %}
+                <a href="{% url 'webkiosk:food-update' food.id %}"><button class='edit'>Edit</button></a>
+                {% endif %}
+                {% if request.user.is_staff %}
+                <a href="{% url 'webkiosk:food-delete' food.id%}"><button class='delete'>Delete</button></a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+</section>
+
+
+
